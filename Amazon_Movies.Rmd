@@ -1,0 +1,38 @@
+---
+title: "AmazonBasics"
+author: "Alexander Sirotkin"
+date: "04 03 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(jsonlite)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Читаем данные Amazon
+
+```{r}
+text<-readLines("~/shared/minor3_2016/data/amazon/reviews_Movies_and_TV_5.json")
+bigJson<-paste(text, collapse=",")
+bigJson<-paste0(c("[",bigJson,"]"), collapse="")
+Movies<-fromJSON(bigJson, simplifyDataFrame= TRUE, flatten = TRUE)
+save(Movies,file="~/GitHub/Data-Science/Amazon_Movies/reviews_Movies_and_TV_5.Rdata")
+
+
+load(file="~/GitHub/Data-Science/Amazon_Movies/reviews_Movies_and_TV_5.Rdata")
+```
+
+```{r}
+text<-readLines("~/shared/minor3_2016/data/amazon/meta_Movies_and_TV_fix.json")
+bigJson<-paste(text, collapse=",")
+bigJson<-paste0(c("[",bigJson,"]"), collapse="")
+Movies_meta<-fromJSON(bigJson, simplifyDataFrame= TRUE, flatten = TRUE)
+save(Movies_meta,file="~/GitHub/Data-Science/Amazon_Movies/meta_Movies_and_TV_fix.Rdata")
+
+
+load(file="~/GitHub/Data-Science/Amazon_Movies/meta_Movies_and_TV_fix.Rdata")
+```
+
+
+
